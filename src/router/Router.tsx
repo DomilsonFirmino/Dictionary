@@ -8,13 +8,13 @@ const router = createHashRouter([
   {
     children: [
       {
-        path: "/Dictionary/",
+        path: "/",
         element: < Home/>
       },{
-        path: "/Dictionary/search",
+        path: "/search",
         element: <Search/>
       },{
-        path: "/Dictionary/fav",
+        path: "/fav",
         element: <Fav/>
       }
     ],

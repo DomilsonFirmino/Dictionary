@@ -21,3 +21,6 @@ This challenge is part of the first phase of the **Web Developer FullStack Inter
 ## Suggested Tech Stack  
 - **Frontend**: ReactJS, TailwindCSS, Vite  
 - **Backend**: Public dictionary API (Oxford, Datamuse, etc.)  
+
+## **Live Preview**  
+- **[Dictionary - Live Demo](https://domilsonfirmino.github.io/Dictionary)**  
