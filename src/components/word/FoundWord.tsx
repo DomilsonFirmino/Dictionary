@@ -23,10 +23,10 @@ export default function FoundWord({data}:{data:dapiResponseType}) {
                     <p className="mt-1 text-3xl text-green-500">{data.phonetic ? data.phonetic : data.phonetics[1].text}</p> 
                 </div>
                 <div className="flex gap-4">
-                    <button onClick={handleFav} type="button" className="aspect-square rounded-full bg-green-400 text-white p-2">
+                    <button onClick={handleFav} type="button" className="aspect-square rounded-full bg-green-400 text-white p-2 cursor-pointer hover:bg-green-600 transition-all">
                         <FaRegStar  size={18} />
                     </button>
-                    <button type="button" onClick={handleClick} className="aspect-square rounded-full bg-green-400 text-white p-2">
+                    <button type="button" onClick={handleClick} className="aspect-square rounded-full bg-green-400 text-white p-2 cursor-pointer hover:bg-green-600 transition-all">
                         <IoVolumeMediumOutline size={24} />
                     </button>
                 </div>

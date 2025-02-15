@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @layer base{
-    body, html{
+    body, html, #root{
         @apply h-full
     }
 }
