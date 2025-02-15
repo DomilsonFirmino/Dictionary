@@ -38,3 +38,8 @@ export interface Phonetic {
     sourceUrl?: string;
     license?:   License;
 }
+
+export interface WordsContextType {
+    favWords: dapiResponseType[];
+    setFavWords: React.Dispatch<React.SetStateAction<dapiResponseType[]>>;
+}

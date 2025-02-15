@@ -1,10 +1,14 @@
 import { dapiResponseType } from "../../@types/types";
 import { FaRegStar } from "react-icons/fa6";
 import { IoVolumeMediumOutline } from "react-icons/io5";
-import { setStorage } from "../../utils/localStorage";
+import { useWordsContext } from "../../customHooks/useWordsContext";
+
 
 
 export default function FoundWord({data}:{data:dapiResponseType}) {
+
+    
+    const {favWords,setFavWords} = useWordsContext()
 
     function handleClick() {
         const audioElement = new window.Audio(data.phonetics[0].audio);
@@ -12,7 +16,12 @@ export default function FoundWord({data}:{data:dapiResponseType}) {
     }
 
     function handleFav(){
-        setStorage("favWords", data)
+        
+        /*check is favorite alread exists there*/
+        const exists = favWords.filter((element)=>element.word == data.word)
+        if(exists.length == 0){
+            setFavWords([data,...favWords])
+        }
     }
     
     return (
