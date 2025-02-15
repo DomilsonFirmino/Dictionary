@@ -1,22 +1,16 @@
-import {createHashRouter, RouterProvider } from "react-router"
+import {createBrowserRouter, RouterProvider } from "react-router"
 import Search from "../components/pages/Search"
 import Fav from "../components/pages/Fav"
 import Home from "../components/pages/Home"
 import ErrorPage from "../components/pages/ErrorPage"
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
+    path: "/",
+    element: < Home/>,
     children: [
-      {
-        path: "/",
-        element: < Home/>
-      },{
-        path: "/search",
-        element: <Search/>
-      },{
-        path: "/fav",
-        element: <Fav/>
-      }
+      {path: "search",element: <Search/>},
+      {path: "fav",element: <Fav/>}
     ],
     errorElement: <ErrorPage></ErrorPage>
   } 

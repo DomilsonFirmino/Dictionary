@@ -1,6 +1,6 @@
 {
   "name": "socompserdictionary",
-  "homepage": "https://DomilsonFirmino.github.io/Dictionary",
+  "homepage": "https://domilsonfirmino.github.io/Dictionary",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,7 +9,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "yarn run build",
+    "predeploy": "yarn build && echo > dist/.nojekyll",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
