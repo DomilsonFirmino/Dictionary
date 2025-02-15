@@ -15,7 +15,7 @@ const router = createBrowserRouter([
         element: <Fav/>
     }
 ])
-export default function Routes() {  
+export default function Router() {  
   return (
   <>
     <RouterProvider router={router} />

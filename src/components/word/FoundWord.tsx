@@ -1,7 +1,9 @@
 import { dapiResponseType } from "../../@types/types";
 import { FaRegStar } from "react-icons/fa6";
+import { FaStar } from "react-icons/fa6";
 import { IoVolumeMediumOutline } from "react-icons/io5";
 import { useWordsContext } from "../../customHooks/useWordsContext";
+import { handleClick, handleFav, isFavorited } from "../../utils/func";
 
 
 
@@ -10,20 +12,6 @@ export default function FoundWord({data}:{data:dapiResponseType}) {
     
     const {favWords,setFavWords} = useWordsContext()
 
-    function handleClick() {
-        const audioElement = new window.Audio(data.phonetics[0].audio);
-        audioElement.play();
-    }
-
-    function handleFav(){
-        
-        /*check is favorite alread exists there*/
-        const exists = favWords.filter((element)=>element.word == data.word)
-        if(exists.length == 0){
-            setFavWords([data,...favWords])
-        }
-    }
-    
     return (
         <div>
             <div className="mt-8 flex justify-between items-center">
@@ -32,10 +20,10 @@ export default function FoundWord({data}:{data:dapiResponseType}) {
                     <p className="mt-1 text-3xl text-green-500">{data.phonetic ? data.phonetic : data.phonetics[1].text}</p> 
                 </div>
                 <div className="flex gap-4">
-                    <button onClick={handleFav} type="button" className="aspect-square rounded-full bg-green-400 text-white p-2 cursor-pointer hover:bg-green-600 transition-all">
-                        <FaRegStar  size={18} />
+                    <button onClick={()=>handleFav(favWords, data, setFavWords)} type="button" className="aspect-square rounded-full bg-green-400 text-white p-2 cursor-pointer hover:bg-green-600 transition-all">
+                        {isFavorited(favWords, data) ? <FaRegStar size={18}/> : <FaStar size={18} color="yellow" /> }
                     </button>
-                    <button type="button" onClick={handleClick} className="aspect-square rounded-full bg-green-400 text-white p-2 cursor-pointer hover:bg-green-600 transition-all">
+                    <button type="button" onClick={()=>handleClick(data)} className="aspect-square rounded-full bg-green-400 text-white p-2 cursor-pointer hover:bg-green-600 transition-all">
                         <IoVolumeMediumOutline size={24} />
                     </button>
                 </div>
