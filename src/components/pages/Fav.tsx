@@ -5,8 +5,7 @@ import { FaRegStar, FaStar } from "react-icons/fa6";
 import { handleClick, handleFav, isFavorited } from "../../utils/func";
 
 export default function Fav() {
-    const {favWords, setFavWords} = useWordsContext()
-    console.log(favWords)
+    const {favWords, setFavWords} = useWordsContext() 
     return (
         <div className="body">
                     
