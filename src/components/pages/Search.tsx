@@ -58,6 +58,7 @@ export default function Search() {
         return
       
       setStart(true)
+      setSuggestions([]);
       const FoundWord = searchedWords.filter((word)=>word.word == query)
       if(FoundWord.length == 0)
         refetch()
