@@ -21,7 +21,9 @@ export default function Search() {
     dapiResponseType[]>({
       queryKey: ["word",query],
       queryFn: ()=>fetchWord(query),
-      enabled: false
+      enabled: false,
+      retry:2,
+      staleTime: 60*5000
     })
   
     useEffect(() => {
