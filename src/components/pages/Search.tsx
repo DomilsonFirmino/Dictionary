@@ -10,6 +10,8 @@ import { Link } from "react-router"
 
 import { IoArrowBackCircle } from "react-icons/io5";
 import { IoSearch } from "react-icons/io5"
+import { useWordsContext } from "../../customHooks/useWordsContext"
+import { useWordsSearchedContext } from "../../customHooks/useWordsSearchedContext"
 
 export default function Search() {
     const [query, setQuery] = useState("")
@@ -25,6 +27,9 @@ export default function Search() {
       retry:2,
       staleTime: 60*5000
     })
+
+    const {favWords} = useWordsContext()
+    const { searchedWords, setSearchedWords } = useWordsSearchedContext()
   
     useEffect(() => {
       if (data && !isError) {
@@ -35,6 +40,15 @@ export default function Search() {
         setPreviousError(error.message) // Mantém o erro anterior caso a busca falhe
       }
     }, [data, isError, error])
+
+    useEffect(() => {
+      if (data && !isError) {
+        const exists = searchedWords.filter((element)=>element.word == data[0].word)
+
+        if(exists.length == 0)
+          setSearchedWords([...searchedWords, data[0]])
+      }
+    }, [data, isError])
   
     function handleSubmit(e: React.FormEvent<HTMLFormElement>){
       e.preventDefault()
@@ -43,7 +57,13 @@ export default function Search() {
         return
       
       setStart(true)
-      refetch()
+      const FoundWord = searchedWords.filter((word)=>word.word == query)
+      if(FoundWord.length == 0)
+        refetch()
+      else{
+        setPreviousResults(FoundWord[0])
+        setPreviousError(null) 
+      }
   
     }
   

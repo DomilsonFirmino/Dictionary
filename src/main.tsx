@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.tsx'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import WordsContextProvider from './contexts/WordsContextProvider.tsx'
+import WordsSearchedContextProvider from './contexts/WordsSearchedContextProvider.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions:{
@@ -15,10 +16,12 @@ const queryClient = new QueryClient({
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <WordsContextProvider>
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
-    </WordsContextProvider>
+      <WordsContextProvider>
+        <WordsSearchedContextProvider>
+          <QueryClientProvider client={queryClient}>
+            <App />
+          </QueryClientProvider>
+        </WordsSearchedContextProvider>
+      </WordsContextProvider>
   </StrictMode>,
 )

@@ -4,10 +4,10 @@ import { retrieveStorage } from "../utils/localStorage";
 import { WordsContext } from "./WordContext";
 
 export default function WordsContextProvider({children}:{children: ReactNode}) {
-    const [favWords, setFavWords] = useState<dapiResponseType[]>(()=>retrieveStorage('words'))
+    const [favWords, setFavWords] = useState<dapiResponseType[]>(()=>retrieveStorage('favWords'))
 
     useEffect(()=>{
-        localStorage.setItem('words', JSON.stringify(favWords))
+        localStorage.setItem('favWords', JSON.stringify(favWords))
     },[favWords])
 
     return (

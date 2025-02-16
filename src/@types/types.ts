@@ -43,3 +43,8 @@ export interface WordsContextType {
     favWords: dapiResponseType[];
     setFavWords: React.Dispatch<React.SetStateAction<dapiResponseType[]>>;
 }
+
+export interface WordsSearchedContextType {
+    searchedWords: dapiResponseType[];
+    setSearchedWords: React.Dispatch<React.SetStateAction<dapiResponseType[]>>;
+}
