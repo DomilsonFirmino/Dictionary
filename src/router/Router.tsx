@@ -6,7 +6,7 @@ import ErrorPage from "../components/pages/ErrorPage"
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/Dictionary",
     element: < Home/>,
     children: [
       {path: "search",element: <Search/>},
