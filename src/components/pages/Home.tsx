@@ -13,7 +13,7 @@ export default function Home() {
             
             <div className="mt-8 text-center flex gap-4">
                 <div className="w-fit m-auto bg-green-400 py-2 px-4 rounded-full hover:bg-green-600 cursor-pointer transition-all">
-                    <Link to="search" className="flex gap-2 justify-center items-center">
+                    <Link to="Search" className="flex gap-2 justify-center items-center">
                         <span className="inline-block text-white font-medium text-lg">Search for a word</span>
                         <span className="inline-block">
                             <IoSearch size={20} color="white"/>
@@ -21,7 +21,7 @@ export default function Home() {
                     </Link>                    
                 </div>
                 <div className="w-fit m-auto bg-green-400 py-2 px-4 rounded-full hover:bg-green-600 cursor-pointer transition-all">
-                    <Link to="fav" className="flex gap-2 justify-center items-center">
+                    <Link to="Fav" className="flex gap-2 justify-center items-center">
                         <span className="inline-block text-white font-medium text-lg">Favorites words</span>
                         <span className="inline-block">
                             <FaRegStar size={20} color="white"/>
