@@ -17,6 +17,15 @@ export function handleFav(favWords:dapiResponseType[], data: dapiResponseType, s
 
 export function handleClick(data: dapiResponseType) {
     const audio = data.phonetics.filter((sound)=>sound.audio!="")
-    const audioElement = new window.Audio(audio[0].audio);
+    const audioElement = new window.Audio(audio[0]?.audio);
     audioElement.play();
+}
+
+
+export function asAudio(data: dapiResponseType){
+    const audio = data.phonetics.filter((sound)=>sound.audio!="")
+    if(audio.length == 0){
+        return false
+    }
+    return true
 }

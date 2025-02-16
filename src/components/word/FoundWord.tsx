@@ -3,7 +3,7 @@ import { FaRegStar } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa6";
 import { IoVolumeMediumOutline } from "react-icons/io5";
 import { useWordsContext } from "../../customHooks/useWordsContext";
-import { handleClick, handleFav, isFavorited } from "../../utils/func";
+import { asAudio, handleClick, handleFav, isFavorited } from "../../utils/func";
 
 
 
@@ -17,13 +17,13 @@ export default function FoundWord({data}:{data:dapiResponseType}) {
             <div className="mt-8 flex justify-between items-center">
                 <div>
                     <p className="font-bold text-6xl">{data.word}</p>
-                    <p className="mt-1 text-3xl text-green-500">{data.phonetic ? data.phonetic : data.phonetics[1].text}</p> 
+                    <p className="mt-1 text-3xl text-green-500">{data.phonetic ? data.phonetic : data.phonetics[1]?.text}</p> 
                 </div>
                 <div className="flex gap-4">
                     <button onClick={()=>handleFav(favWords, data, setFavWords)} type="button" className="aspect-square rounded-full bg-green-400 text-white p-2 cursor-pointer hover:bg-green-600 transition-all">
                         {isFavorited(favWords, data) ? <FaRegStar size={18}/> : <FaStar size={18} color="yellow" /> }
                     </button>
-                    <button type="button" onClick={()=>handleClick(data)} className="aspect-square rounded-full bg-green-400 text-white p-2 cursor-pointer hover:bg-green-600 transition-all">
+                    <button disabled={!asAudio(data)} type="button" onClick={()=>handleClick(data)} className="aspect-square rounded-full bg-green-400 text-white p-2 cursor-pointer hover:bg-green-600 transition-all disabled:pointer-events-none disabled:bg-gray-400">
                         <IoVolumeMediumOutline size={24} />
                     </button>
                 </div>
