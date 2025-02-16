@@ -1,13 +1,13 @@
 import { ReactNode, useEffect, useState } from "react"
 import { dapiResponseType } from "../@types/types";
-import { retrieveStorage } from "../utils/localStorage";
 import { WordsSearchedContext } from "./WordSearchedContext";
+import { retrieveSessionStorage } from "../utils/sessionStorage";
 
 export default function WordsContextProvider({children}:{children: ReactNode}) {
-    const [searchedWords, setSearchedWords] = useState<dapiResponseType[]>(()=>retrieveStorage('searchedWords'))
+    const [searchedWords, setSearchedWords] = useState<dapiResponseType[]>(()=>retrieveSessionStorage('searchedWords'))
 
     useEffect(()=>{
-        localStorage.setItem('searchedWords', JSON.stringify(searchedWords))
+        sessionStorage.setItem('searchedWords', JSON.stringify(searchedWords))
     },[searchedWords])
 
     return (
