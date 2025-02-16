@@ -10,7 +10,6 @@ export default function Fav() {
     const params = useParams();
     const {favWords, setFavWords} = useWordsContext()
     const word = favWords.filter((word)=>word.word==params.pid)
-    console.log(word)
 
     if(word.length == 0)
         return <Navigate to={"/Dictionary/Favs"} replace/>
