@@ -10,14 +10,16 @@ import { Link } from "react-router"
 
 import { IoArrowBackCircle } from "react-icons/io5";
 import { IoSearch } from "react-icons/io5"
-import { useWordsContext } from "../../customHooks/useWordsContext"
 import { useWordsSearchedContext } from "../../customHooks/useWordsSearchedContext"
+
+import wordList from "../../api/wordsArray"
 
 export default function Search() {
     const [query, setQuery] = useState("")
     const [start, setStart] = useState(false)
     const [previousResults, setPreviousResults] = useState<dapiResponseType | null>(null)
     const [previousError, setPreviousError] = useState<string | null>(null)
+    const [suggestions, setSuggestions] = useState<string[]>([]);
   
     const {data,error,isError,isFetching, refetch} = useQuery<
     dapiResponseType[]>({
@@ -28,7 +30,6 @@ export default function Search() {
       staleTime: 60*5000
     })
 
-    const {favWords} = useWordsContext()
     const { searchedWords, setSearchedWords } = useWordsSearchedContext()
   
     useEffect(() => {
@@ -48,7 +49,7 @@ export default function Search() {
         if(exists.length == 0)
           setSearchedWords([...searchedWords, data[0]])
       }
-    }, [data, isError])
+    }, [data, isError, searchedWords, setSearchedWords])
   
     function handleSubmit(e: React.FormEvent<HTMLFormElement>){
       e.preventDefault()
@@ -66,10 +67,28 @@ export default function Search() {
       }
   
     }
+
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>){
+      const value = e.target.value;
+      setQuery(value);
+      if (value.length > 0) {
+        const filteredSuggestions = wordList
+          .filter((word: string) => word.toLowerCase().startsWith(value.toLowerCase()))
+          // .slice(0, 5);
+        setSuggestions(filteredSuggestions);
+      } else {
+        setSuggestions([]);
+      }
+    }
+
+    
+    const handleSelectSuggestion = (word: string) => {
+      setQuery(word);
+      setSuggestions([]);
+    };
   
     return(
       <div className="body">
-        
         <div className="mb-4">
             <Link to="/Dictionary">
                 <IoArrowBackCircle size={32} color="green" />
@@ -80,14 +99,29 @@ export default function Search() {
   
           <Form handleSubmit={handleSubmit} styles="flex gap-4">
             
-            <InputComponent
-              name={"query"}
-              id={"query"}
-              state={query}
-              placeholder={"word"}
-              handleChange={(e) => setQuery(e.target.value)}
-              styles={"flex-1"}
-            />
+            <div className="relative flex gap-4 flex-1">
+              <InputComponent
+                name={"query"}
+                id={"query"}
+                state={query}
+                placeholder={"word"}
+                handleChange={handleChange}
+                styles={"flex-1"}
+              />
+              {suggestions.length > 0 && (
+                <ul className="absolute left-0 right-0 top-12 h-[15rem] overflow-y-scroll bg-white border rounded mt-1">
+                  {suggestions.map((word, index) => (
+                    <li
+                      key={index}
+                      className="p-2 hover:bg-gray-200 cursor-pointer"
+                      onClick={() => handleSelectSuggestion(word)}
+                    >
+                      {word}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
   
             <button type="submit" className="rounded-full aspect-square px-3 bg-green-400 cursor-pointer hover:bg-green-600 transition-all">
               <IoSearch size={20} color="white"/>
