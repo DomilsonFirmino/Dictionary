@@ -9,7 +9,7 @@ export default function Router() {
   <>
     <BrowserRouter>
       <Routes>
-        <Route path="/">
+        <Route path="/Dictionary">
           <Route index element={<Home />}/>
           <Route path="Search" element={<Search />}/>
           <Route path="Fav" element={<Fav />}/>

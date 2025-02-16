@@ -10,7 +10,7 @@ export default function Fav() {
         <div className="body">
                     
             <div className="mb-4">
-                <Link to="/">
+                <Link to="/Dictionary">
                     <IoArrowBackCircle size={32} color="green" />
                 </Link>
             </div>
